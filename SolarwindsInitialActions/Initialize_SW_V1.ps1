@@ -16,12 +16,12 @@
 .NOTES
     Ensure that the SwisPowerShell module is installed and that the necessary permissions are granted for script execution.
     The script also handles various error scenarios and logs them for troubleshooting.
-    The script is intended to run under an account that has the appropriate permission on IT-NOC. Right now - ZONAL\Zservice
+    The script is intended to run under an account that has the appropriate permission on the SW Orion Server.
 
 
 File Name      : Initialize_SW_V1.ps1
 Last Modified  : Oct 5, 2023
-Prerequisites  : OrionSDK and SwisPowershell Modules Installed, Connectivity with it-noc.zonal.co.uk via the swisPowershell module.
+Prerequisites  : OrionSDK and SwisPowershell Modules Installed, Connectivity with SWOrion Server via the swisPowershell module.
 #>
 
 
@@ -195,7 +195,7 @@ debug "ACTION 2: ADD TO ORION GROUP $OrionGroupName"
 
 debug "Retrieving the Orion GroupID for $OrionGroupName..."
 
-$OrionGroupID = Get-SwisData -SwisConnection $swis -Query "SELECT ContainerID FROM Orion.Container WHERE Name = 'Tanfield'"
+$OrionGroupID = Get-SwisData -SwisConnection $swis -Query "SELECT ContainerID FROM Orion.Container WHERE Name = '$OrionGroupName'"
 
 if(!($OrionGroupID))
 {
